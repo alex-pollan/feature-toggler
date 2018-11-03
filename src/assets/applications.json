@@ -1,0 +1,27 @@
+{
+  "applications": [{
+      "id": "shop",
+      "isDeleted": false
+    },
+    {
+      "id": "checkout",
+      "isDeleted": false
+    },
+    {
+      "id": "configure",
+      "isDeleted": false
+    },
+    {
+      "id": "accessories",
+      "isDeleted": false
+    },
+    {
+      "id": "navigation-client",
+      "isDeleted": false
+    },
+    {
+      "id": "oldapp",
+      "isDeleted": true
+    }
+  ]
+}

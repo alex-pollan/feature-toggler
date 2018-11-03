@@ -1,0 +1,16 @@
+{
+  "toggles": [{
+    "id": "EnableNotificationCenter",
+    "name": "Enable Notification Center",
+    "createdBy":"EUROPE\\alex_pollan",
+    "createdAt": "2018-11-02",
+    "value": true
+  },
+  {
+    "id": "EnablePsp",
+    "name": "Enable PSP pages",
+    "createdBy":"EUROPE\\alex_pollan",
+    "createdAt": "2018-11-01",
+    "value": false
+  }]
+}
