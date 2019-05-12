@@ -1,0 +1,33 @@
+<div class="row mt-1">
+  <div class="col">
+    <h2>
+      Features
+    </h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let toggle of toggles">
+          <td>{{toggle.id}}</td>
+          <td>{{toggle.name}}</td>
+          <td>
+            <button type="button" class="btn" aria-pressed="false" autocomplete="off"
+              [ngClass]="{'btn-primary': toggle.value, 'btn-secondary' : !toggle.value}"
+              (click)="doToggle(toggle)">
+              {{toggle.value ? 'On' : 'Off'}}
+            </button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

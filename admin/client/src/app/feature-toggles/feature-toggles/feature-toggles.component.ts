@@ -9,14 +9,12 @@ import { Toggle } from 'src/app/models/toggle';
   styleUrls: ['./feature-toggles.component.sass']
 })
 export class FeatureTogglesComponent implements OnInit {
-  appId: string;
   toggles: Toggle[];
 
   constructor(private route: ActivatedRoute, private featureTogglesService: FeatureTogglesService) { }
 
   ngOnInit() {
-    this.appId = this.route.snapshot.paramMap.get('appId');
-    this.featureTogglesService.getAll(this.appId).subscribe(data => this.toggles = data.toggles);
+    this.featureTogglesService.getAll().subscribe(data => this.toggles = data.toggles);
   }
 
   doToggle(toggle: Toggle) {

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TogglerAdmin.Api", "TogglerAdminApi\TogglerAdmin.Api.csproj", "{D032A682-8509-4F11-97FC-0A601BCD25EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TogglerAdmin.Data.MongoDb", "TogglerAdmin.Data.MongoDb\TogglerAdmin.Data.MongoDb.csproj", "{829A5B8D-67F3-40C2-A70E-7C1FF3279C11}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D032A682-8509-4F11-97FC-0A601BCD25EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D032A682-8509-4F11-97FC-0A601BCD25EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D032A682-8509-4F11-97FC-0A601BCD25EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D032A682-8509-4F11-97FC-0A601BCD25EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{829A5B8D-67F3-40C2-A70E-7C1FF3279C11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{829A5B8D-67F3-40C2-A70E-7C1FF3279C11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{829A5B8D-67F3-40C2-A70E-7C1FF3279C11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{829A5B8D-67F3-40C2-A70E-7C1FF3279C11}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D0433E14-CC32-40E7-8D9E-084BE3545ABF}
+	EndGlobalSection
+EndGlobal

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class FeatureTogglesService {
   constructor(private httpClient: HttpClient) { }
 
-  getAll(appId: string): Observable<any> {
-    return this.httpClient.get<any>(`assets/ft-${appId}.json`);
+  getAll(): Observable<any> {
+    return this.httpClient.get<any>(`assets/ft.json`);
   }
 }
