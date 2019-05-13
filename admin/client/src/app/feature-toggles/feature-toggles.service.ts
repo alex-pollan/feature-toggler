@@ -9,6 +9,6 @@ export class FeatureTogglesService {
   constructor(private httpClient: HttpClient) { }
 
   getAll(): Observable<any> {
-    return this.httpClient.get<any>(`assets/ft.json`);
+    return this.httpClient.get<any>('https://localhost:44314/api/featuretoggle');
   }
 }

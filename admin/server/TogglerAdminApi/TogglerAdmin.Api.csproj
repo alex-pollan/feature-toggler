@@ -8,6 +8,13 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToggleAdmin.Domain\TogglerAdmin.Domain.csproj" />
+    <ProjectReference Include="..\TogglerAdmin.Abstractions\TogglerAdmin.Abstractions.csproj" />
+    <ProjectReference Include="..\TogglerAdmin.Data.MongoDb\TogglerAdmin.Data.MongoDb.csproj" />
   </ItemGroup>
 
 </Project>

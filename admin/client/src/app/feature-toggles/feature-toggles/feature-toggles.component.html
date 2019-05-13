@@ -11,20 +11,20 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>ID</th>
           <th>Name</th>
-          <th>Value</th>
+          <th>Description</th>
+          <th>Enabled</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let toggle of toggles">
-          <td>{{toggle.id}}</td>
           <td>{{toggle.name}}</td>
+          <td>{{toggle.description}}</td>
           <td>
             <button type="button" class="btn" aria-pressed="false" autocomplete="off"
-              [ngClass]="{'btn-primary': toggle.value, 'btn-secondary' : !toggle.value}"
+              [ngClass]="{'btn-primary': toggle.enabled, 'btn-secondary' : !toggle.enabled}"
               (click)="doToggle(toggle)">
-              {{toggle.value ? 'On' : 'Off'}}
+              {{toggle.enabled ? 'On' : 'Off'}}
             </button>
         </tr>
       </tbody>

@@ -14,11 +14,11 @@ export class FeatureTogglesComponent implements OnInit {
   constructor(private route: ActivatedRoute, private featureTogglesService: FeatureTogglesService) { }
 
   ngOnInit() {
-    this.featureTogglesService.getAll().subscribe(data => this.toggles = data.toggles);
+    this.featureTogglesService.getAll().subscribe(data => this.toggles = data);
   }
 
   doToggle(toggle: Toggle) {
-    toggle.value = !toggle.value;
+    toggle.enabled = !toggle.enabled;
     // TODO: save
   }
 }
