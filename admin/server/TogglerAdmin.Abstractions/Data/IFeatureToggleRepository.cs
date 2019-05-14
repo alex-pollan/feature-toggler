@@ -7,6 +7,7 @@ namespace TogglerAdmin.Abstractions.Data
     {
         IEnumerable<IFeatureToggleModel> Get();
         IFeatureToggleModel Get(string id);
+        IFeatureToggleModel GetByName(string name);
         IFeatureToggleModel Create(IFeatureToggleModel model);
         void Update(string id, IFeatureToggleModel model);
         void Remove(string id);

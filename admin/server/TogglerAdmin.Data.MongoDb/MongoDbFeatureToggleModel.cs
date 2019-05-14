@@ -11,7 +11,7 @@ namespace TogglerAdmin.Data.MongoDb
 
         public MongoDbFeatureToggleModel(IFeatureToggleModel model)
         {
-            Name = model.Name;
+            Name = model.Name.ToLowerInvariant();
             Description = model.Description;
             Enabled = model.Enabled;
             Creator = model.Creator;
@@ -24,6 +24,7 @@ namespace TogglerAdmin.Data.MongoDb
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
+        [BsonRequired]
         [BsonElement("Name")]
         public string Name { get; set; }
 

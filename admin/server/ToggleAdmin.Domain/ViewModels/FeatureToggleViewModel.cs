@@ -6,6 +6,11 @@ namespace TogglerAdmin.Domain.ViewModels
 {
     public class FeatureToggleViewModel : IFeatureToggleViewModel
     {
+        public static IFeatureToggleViewModel Empty()
+        {
+            return new FeatureToggleViewModel();
+        }
+
         public FeatureToggleViewModel() { }
 
         public FeatureToggleViewModel(IFeatureToggleModel model)
@@ -20,14 +25,14 @@ namespace TogglerAdmin.Domain.ViewModels
             ModifiedAt = model.ModifiedAt;
         }
 
+        public bool IsEmpty => string.IsNullOrWhiteSpace(Id);
         public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public bool Enabled { get; set; }
         public string Creator { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
         public string Modifier { get; set; }
         public DateTime? ModifiedAt { get; set; }
     }
-
 }

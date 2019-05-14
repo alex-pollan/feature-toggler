@@ -40,6 +40,12 @@ namespace TogglerAdmin.Domain
                 .Select(ftm => new FeatureToggleViewModel(ftm));
         }
 
+        public IFeatureToggleViewModel GetByName(string name)
+        {
+            var model = _repository.GetByName(name);
+            return model != null ? new FeatureToggleViewModel(model) : FeatureToggleViewModel.Empty();
+        }
+
         public void Update(IFeatureToggleViewModel viewModel, IAppOperationContext context)
         {
             var model = _repository.CreateModel();

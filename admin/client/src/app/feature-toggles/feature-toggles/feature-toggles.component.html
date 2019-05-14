@@ -1,33 +1,8 @@
 <div class="row mt-1">
   <div class="col">
     <h2>
-      Features
+      Feature toggles
     </h2>
   </div>
 </div>
-
-<div class="row">
-  <div class="col">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Enabled</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let toggle of toggles">
-          <td>{{toggle.name}}</td>
-          <td>{{toggle.description}}</td>
-          <td>
-            <button type="button" class="btn" aria-pressed="false" autocomplete="off"
-              [ngClass]="{'btn-primary': toggle.enabled, 'btn-secondary' : !toggle.enabled}"
-              (click)="doToggle(toggle)">
-              {{toggle.enabled ? 'On' : 'Off'}}
-            </button>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<router-outlet></router-outlet>

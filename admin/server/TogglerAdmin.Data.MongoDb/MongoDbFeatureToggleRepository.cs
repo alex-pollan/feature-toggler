@@ -1,7 +1,12 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using TogglerAdmin.Abstractions.Data;
 using TogglerAdmin.Abstractions.Data.Models;
+using TogglerAdmin.Abstractions.Exceptions;
 
 namespace TogglerAdmin.Data.MongoDb
 {
@@ -21,6 +26,11 @@ namespace TogglerAdmin.Data.MongoDb
             return _featureToggles.Find(ft => true).ToList();
         }
 
+        public IFeatureToggleModel GetByName(string name)
+        {
+            return _featureToggles.Find(ft => ft.Name == name).FirstOrDefault();
+        }
+
         public IFeatureToggleModel Get(string id)
         {
             return _featureToggles.Find(ft => ft.Id == id).FirstOrDefault();
@@ -29,6 +39,11 @@ namespace TogglerAdmin.Data.MongoDb
         public IFeatureToggleModel Create(IFeatureToggleModel model)
         {
             var concreteModel = new MongoDbFeatureToggleModel(model);
+
+            if (_featureToggles.Find(ft => ft.Name == model.Name).Any())
+            {
+                throw new DuplicateFeatureToggleNameException(model.Name);
+            }
 
             _featureToggles.InsertOne(concreteModel);
 

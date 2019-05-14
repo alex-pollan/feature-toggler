@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -19,11 +18,10 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    FeatureTogglesModule
+    FeatureTogglesModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

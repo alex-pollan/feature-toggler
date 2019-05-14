@@ -1,16 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { FeatureTogglesListComponent } from './list/list.component';
+import { FeatureTogglesCreateComponent } from './create/create.component';
 import { FeatureTogglesComponent } from './feature-toggles/feature-toggles.component';
+
+import { FeatureTogglesRoutingModule } from './feature-toggles-routing.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    FeatureTogglesRoutingModule
   ],
   declarations: [
+    FeatureTogglesListComponent,
+    FeatureTogglesCreateComponent,
     FeatureTogglesComponent
   ],
   exports: [
-    FeatureTogglesComponent
   ]
 })
 export class FeatureTogglesModule { }

@@ -4,12 +4,13 @@ namespace TogglerAdmin.Abstractions.Domain.ViewModels
 {
     public interface IFeatureToggleViewModel
     {
+        bool IsEmpty { get; }
         string Id { get; set; }
         string Name { get; set; }
         string Description { get; set; }
         bool Enabled { get; set; }
         string Creator { get; set; }
-        DateTime CreatedAt { get; set; }
+        DateTime? CreatedAt { get; set; }
         string Modifier { get; set; }
         DateTime? ModifiedAt { get; set; }
     }

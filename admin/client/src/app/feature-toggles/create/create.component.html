@@ -1,0 +1,27 @@
+<div class="row mt-1">
+  <div class="col">
+    <h3>
+      Create
+    </h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" formControlName="name" id="name" class="form-control" aria-describedby="nameHelp"
+          placeholder="Enter name of the new feature toggle">
+        <small id="nameHelp" class="form-text text-muted">This is the name ytou'll use to evaluate the feature toggle in
+          code. It has to be unique.</small>
+      </div>
+      <div class="form-group">
+        <label for="name">Description</label>
+        <input type="text" formControlName="description" id="description" class="form-control"
+          placeholder="Enter description">
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!createForm.valid">Create</button>
+    </form>
+  </div>
+</div>

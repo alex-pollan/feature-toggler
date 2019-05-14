@@ -25,9 +25,16 @@ namespace TogglerAdmin.Api.Controllers
         [HttpPost]
         public ActionResult Post(FeatureToggleViewModel model)
         {
-            _service.Create(model, GetContext());
+            var savedModel = _service.Create(model, GetContext());
 
-            return NoContent();
+            return Ok(new { Id = savedModel.Id.ToString() });
+        }
+
+        [HttpGet]
+        [Route("exists/{name}")]
+        public ActionResult<bool> Exists(string name)
+        {
+            return Ok(new { Exists = !_service.GetByName(name).IsEmpty });
         }
 
         private IAppOperationContext GetContext()
@@ -35,5 +42,4 @@ namespace TogglerAdmin.Api.Controllers
             return new AppOperationContext(HttpContext.User.Identity.Name);
         }
     }
-
 }
