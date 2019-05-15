@@ -8,12 +8,14 @@ import { FeatureTogglesCreateComponent } from './create/create.component';
 import { FeatureTogglesComponent } from './feature-toggles/feature-toggles.component';
 
 import { FeatureTogglesRoutingModule } from './feature-toggles-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
+    NgbModule,
     FeatureTogglesRoutingModule
   ],
   declarations: [

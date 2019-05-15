@@ -5,4 +5,9 @@
     </h2>
   </div>
 </div>
+
+<ngb-alert *ngIf="justCreatedFeatureToggle" (close)="justCreatedFeatureToggle = null" type="info" class="mt-1">
+    The feature toggle <strong>{{justCreatedFeatureToggle}}</strong> have been created successfully
+</ngb-alert>
+
 <router-outlet></router-outlet>

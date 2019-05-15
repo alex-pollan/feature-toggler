@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, ValidatorFn, AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FeatureTogglesService } from '../feature-toggles.service';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Toggle } from 'src/app/models/toggle';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EventEmitter } from 'protractor';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-feature-toggles-create',
@@ -14,7 +15,10 @@ import { Toggle } from 'src/app/models/toggle';
 export class FeatureTogglesCreateComponent implements OnInit {
   createForm: FormGroup;
 
-  constructor(private featureTogglesService: FeatureTogglesService) { }
+  constructor(private featureTogglesService: FeatureTogglesService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private messageService: MessageService) { }
 
   ngOnInit() {
     this.createForm = new FormGroup({
@@ -24,15 +28,22 @@ export class FeatureTogglesCreateComponent implements OnInit {
     });
   }
 
+  get name() { return this.createForm.get('name'); }
+
+  get description() { return this.createForm.get('description'); }
+
   onSubmit() {
     const toggle = {
-      name: this.createForm.controls['name'].value,
-      description: this.createForm.controls['description'].value,
+      name: this.name.value,
+      description: this.description.value,
       enabled: true
     };
 
     this.featureTogglesService.create(<Toggle>toggle)
-      .subscribe(_ => {}, err => console.log(err));
+      .subscribe(_ => {
+        this.messageService.broadcast('feature-toggle', { created: this.name.value });
+        this.router.navigate(['../'], { relativeTo: this.route });
+      }, err => console.log(err));
   }
 
   duplicatedNameValidator(): AsyncValidatorFn {

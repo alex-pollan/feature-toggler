@@ -16,9 +16,13 @@ const ftRoutes: Routes = [{
             component: FeatureTogglesCreateComponent,
         },
         {
-            path: '',
+            path: ':ftcreated',
             component: FeatureTogglesListComponent
         },
+        {
+            path: '',
+            component: FeatureTogglesListComponent
+        }
     ]
 }];
 
