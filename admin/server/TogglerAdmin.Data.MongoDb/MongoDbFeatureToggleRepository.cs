@@ -59,6 +59,12 @@ namespace TogglerAdmin.Data.MongoDb
         {
             await _featureToggles.DeleteOneAsync(ft => ft.Id == id);
         }
+        
+        public async Task Enable(string id, bool enable)
+        {
+            await _featureToggles.UpdateOneAsync(ft => ft.Id == id,
+                Builders<MongoDbFeatureToggleModel>.Update.Set(s => s.Enabled, enable));
+        }
 
         public IFeatureToggleModel CreateModel()
         {

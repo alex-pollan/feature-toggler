@@ -10,5 +10,6 @@ namespace TogglerAdmin.Abstractions.Domain
         Task<IFeatureToggleViewModel> GetByName(string name);
         Task<IFeatureToggleViewModel> Create(IFeatureToggleViewModel viewModel, IAppOperationContext context);
         Task Update(IFeatureToggleViewModel viewModel, IAppOperationContext context);
+        Task Enable(string id, bool enable);
     }
 }

@@ -13,5 +13,6 @@ namespace TogglerAdmin.Abstractions.Data
         Task Update(string id, IFeatureToggleModel model);
         Task Remove(string id);
         IFeatureToggleModel CreateModel();
+        Task Enable(string id, bool enable);
     }
 }

@@ -27,6 +27,16 @@ export class FeatureTogglesService {
       );
   }
 
+  enable(toggle: Toggle, enable: boolean) {
+    const patchRequest = {
+      id: toggle.id,
+      propertyName: 'enable',
+      propertyValue: enable
+    };
+
+    return this.httpClient.patch('https://localhost:44314/api/featuretoggle', patchRequest, httpOptions);
+  }
+
   isDuplicated(value: any): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.httpClient.get<any>(`https://localhost:44314/api/featuretoggle/exists/${value}`)

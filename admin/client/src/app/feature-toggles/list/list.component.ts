@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FeatureTogglesService } from '../feature-toggles.service';
-import { Toggle } from 'src/app/models/toggle';
+import { ToggleListModel } from 'src/app/models/toggle-list-model';
 
 @Component({
   selector: 'app-feature-toggles-list',
@@ -9,16 +9,24 @@ import { Toggle } from 'src/app/models/toggle';
   styleUrls: ['./list.component.sass']
 })
 export class FeatureTogglesListComponent implements OnInit {
-  toggles: Toggle[];
+  toggleModels: ToggleListModel[];
 
   constructor(private route: ActivatedRoute, private featureTogglesService: FeatureTogglesService) { }
 
   ngOnInit() {
-    this.featureTogglesService.getAll().subscribe(data => this.toggles = data);
+    this.featureTogglesService.getAll().subscribe(data => this.toggleModels = data.map(toggle => new ToggleListModel(toggle)));
   }
 
-  doToggle(toggle: Toggle) {
-    toggle.enabled = !toggle.enabled;
-    // TODO: save
+  doToggle(model: ToggleListModel) {
+    const toggle = model.toggle;
+    model.changing = true;
+    this.featureTogglesService.enable(toggle, !toggle.enabled)
+      .subscribe(_ => {
+        toggle.enabled = !toggle.enabled;
+        model.changing = false;
+      }, err => {
+        // TODO: handle errors
+        model.changing = false;
+      });
   }
 }

@@ -35,6 +35,11 @@ namespace TogglerAdmin.Domain
             return new FeatureToggleViewModel(savedModel);
         }
 
+        public async Task Enable(string id, bool enable)
+        {
+            await _repository.Enable(id, enable);
+        }
+
         public async Task<IEnumerable<IFeatureToggleViewModel>> Get()
         {
             return (await _repository.Get())

@@ -23,13 +23,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let toggle of toggles">
-          <td>{{toggle.name}}</td>
-          <td>{{toggle.description}}</td>
+        <tr *ngFor="let model of toggleModels">
+          <td>{{model.toggle.name}}</td>
+          <td>{{model.toggle.description}}</td>
           <td>
             <button type="button" class="btn" aria-pressed="false" autocomplete="off"
-              [ngClass]="{'btn-primary': toggle.enabled, 'btn-secondary' : !toggle.enabled}" (click)="doToggle(toggle)">
-              {{toggle.enabled ? 'On' : 'Off'}}
+              [ngClass]="{'btn-primary': model.toggle.enabled, 'btn-secondary' : !model.toggle.enabled}" (click)="doToggle(model)"
+              [disabled]="model.changing">
+              {{model.toggle.enabled ? 'On' : 'Off'}}
             </button>
         </tr>
       </tbody>
