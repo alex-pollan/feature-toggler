@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TogglerAdmin.Abstractions.Domain.ViewModels;
 
 namespace TogglerAdmin.Abstractions.Domain
 {
     public interface IFeatureToggleService
     {
-        IEnumerable<IFeatureToggleViewModel> Get();
-        IFeatureToggleViewModel GetByName(string name);
-        IFeatureToggleViewModel Create(IFeatureToggleViewModel viewModel, IAppOperationContext context);
-        void Update(IFeatureToggleViewModel viewModel, IAppOperationContext context);
+        Task<IEnumerable<IFeatureToggleViewModel>> Get();
+        Task<IFeatureToggleViewModel> GetByName(string name);
+        Task<IFeatureToggleViewModel> Create(IFeatureToggleViewModel viewModel, IAppOperationContext context);
+        Task Update(IFeatureToggleViewModel viewModel, IAppOperationContext context);
     }
 }

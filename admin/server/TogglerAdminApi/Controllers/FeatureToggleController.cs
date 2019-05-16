@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TogglerAdmin.Abstractions;
 using TogglerAdmin.Abstractions.Domain;
 using TogglerAdmin.Domain.ViewModels;
@@ -17,24 +18,24 @@ namespace TogglerAdmin.Api.Controllers
             _service = service;
         }
 
-        public ActionResult<IEnumerable<FeatureToggleViewModel>> Get()
+        public async Task<ActionResult<IEnumerable<FeatureToggleViewModel>>> Get()
         {
-            return Ok(_service.Get());
+            return Ok(await _service.Get());
         }
 
         [HttpPost]
-        public ActionResult Post(FeatureToggleViewModel model)
+        public async Task<ActionResult> Post(FeatureToggleViewModel model)
         {
-            var savedModel = _service.Create(model, GetContext());
+            var savedModel = await _service.Create(model, GetContext());
 
             return Ok(new { Id = savedModel.Id.ToString() });
         }
 
         [HttpGet]
         [Route("exists/{name}")]
-        public ActionResult<bool> Exists(string name)
+        public async Task<ActionResult<bool>> Exists(string name)
         {
-            return Ok(new { Exists = !_service.GetByName(name).IsEmpty });
+            return Ok(new { Exists = !(await _service.GetByName(name)).IsEmpty });
         }
 
         private IAppOperationContext GetContext()

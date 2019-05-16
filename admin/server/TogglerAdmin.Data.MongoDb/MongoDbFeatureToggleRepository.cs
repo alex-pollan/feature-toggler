@@ -1,9 +1,7 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Driver;
-using System;
+﻿using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TogglerAdmin.Abstractions.Data;
 using TogglerAdmin.Abstractions.Data.Models;
 using TogglerAdmin.Abstractions.Exceptions;
@@ -21,45 +19,45 @@ namespace TogglerAdmin.Data.MongoDb
             _featureToggles = database.GetCollection<MongoDbFeatureToggleModel>("FeatureToggles");
         }
 
-        public IEnumerable<IFeatureToggleModel> Get()
+        public async Task<IEnumerable<IFeatureToggleModel>> Get()
         {
-            return _featureToggles.Find(ft => true).ToList();
+            return (await _featureToggles.FindAsync(ft => true)).ToList();
         }
 
-        public IFeatureToggleModel GetByName(string name)
+        public async Task<IFeatureToggleModel> GetByName(string name)
         {
-            return _featureToggles.Find(ft => ft.Name == name).FirstOrDefault();
+            return (await _featureToggles.FindAsync(ft => ft.Name == name)).FirstOrDefault();
         }
 
-        public IFeatureToggleModel Get(string id)
+        public async Task<IFeatureToggleModel> Get(string id)
         {
-            return _featureToggles.Find(ft => ft.Id == id).FirstOrDefault();
+            return (await _featureToggles.FindAsync(ft => ft.Id == id)).FirstOrDefault();
         }
 
-        public IFeatureToggleModel Create(IFeatureToggleModel model)
+        public async Task<IFeatureToggleModel> Create(IFeatureToggleModel model)
         {
             var concreteModel = new MongoDbFeatureToggleModel(model);
 
-            if (_featureToggles.Find(ft => ft.Name == model.Name).Any())
+            if ((await _featureToggles.FindAsync(ft => ft.Name == model.Name)).Any())
             {
                 throw new DuplicateFeatureToggleNameException(model.Name);
             }
 
-            _featureToggles.InsertOne(concreteModel);
+            await _featureToggles.InsertOneAsync(concreteModel);
 
             return concreteModel;
         }
 
-        public void Update(string id, IFeatureToggleModel model)
+        public async Task Update(string id, IFeatureToggleModel model)
         {
             var concreteModel = new MongoDbFeatureToggleModel(model);
 
-            _featureToggles.ReplaceOne(ft => ft.Id == id, concreteModel);
+            await _featureToggles.ReplaceOneAsync(ft => ft.Id == id, concreteModel);
         }
 
-        public void Remove(string id)
+        public async Task Remove(string id)
         {
-            _featureToggles.DeleteOne(ft => ft.Id == id);
+            await _featureToggles.DeleteOneAsync(ft => ft.Id == id);
         }
 
         public IFeatureToggleModel CreateModel()

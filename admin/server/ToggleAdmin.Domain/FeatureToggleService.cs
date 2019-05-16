@@ -5,6 +5,7 @@ using TogglerAdmin.Abstractions;
 using TogglerAdmin.Abstractions.Data;
 using TogglerAdmin.Abstractions.Domain;
 using TogglerAdmin.Abstractions.Domain.ViewModels;
+using System.Threading.Tasks;
 
 namespace TogglerAdmin.Domain
 {
@@ -19,7 +20,7 @@ namespace TogglerAdmin.Domain
             _timeProvider = timeProvider;
         }
 
-        public IFeatureToggleViewModel Create(IFeatureToggleViewModel viewModel, IAppOperationContext context)
+        public async Task<IFeatureToggleViewModel> Create(IFeatureToggleViewModel viewModel, IAppOperationContext context)
         {
             var model = _repository.CreateModel();
 
@@ -29,24 +30,24 @@ namespace TogglerAdmin.Domain
             model.Creator = context.UserName;
             model.CreatedAt = _timeProvider.UtcNow;
 
-            var savedModel = _repository.Create(model);
+            var savedModel = await _repository.Create(model);
 
             return new FeatureToggleViewModel(savedModel);
         }
 
-        public IEnumerable<IFeatureToggleViewModel> Get()
+        public async Task<IEnumerable<IFeatureToggleViewModel>> Get()
         {
-            return _repository.Get()
+            return (await _repository.Get())
                 .Select(ftm => new FeatureToggleViewModel(ftm));
         }
 
-        public IFeatureToggleViewModel GetByName(string name)
+        public async Task<IFeatureToggleViewModel> GetByName(string name)
         {
-            var model = _repository.GetByName(name);
+            var model = await _repository.GetByName(name);
             return model != null ? new FeatureToggleViewModel(model) : FeatureToggleViewModel.Empty();
         }
 
-        public void Update(IFeatureToggleViewModel viewModel, IAppOperationContext context)
+        public async Task Update(IFeatureToggleViewModel viewModel, IAppOperationContext context)
         {
             var model = _repository.CreateModel();
 
@@ -56,7 +57,7 @@ namespace TogglerAdmin.Domain
             model.Modifier = context.UserName;
             model.ModifiedAt = _timeProvider.UtcNow;
 
-            _repository.Update(viewModel.Id, model);
+            await _repository.Update(viewModel.Id, model);
         }
     }
 }

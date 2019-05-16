@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TogglerAdmin.Abstractions.Data.Models;
 
 namespace TogglerAdmin.Abstractions.Data
 {
     public interface IFeatureToggleRepository
     {
-        IEnumerable<IFeatureToggleModel> Get();
-        IFeatureToggleModel Get(string id);
-        IFeatureToggleModel GetByName(string name);
-        IFeatureToggleModel Create(IFeatureToggleModel model);
-        void Update(string id, IFeatureToggleModel model);
-        void Remove(string id);
+        Task<IEnumerable<IFeatureToggleModel>> Get();
+        Task<IFeatureToggleModel> Get(string id);
+        Task<IFeatureToggleModel> GetByName(string name);
+        Task<IFeatureToggleModel> Create(IFeatureToggleModel model);
+        Task Update(string id, IFeatureToggleModel model);
+        Task Remove(string id);
         IFeatureToggleModel CreateModel();
     }
 }
