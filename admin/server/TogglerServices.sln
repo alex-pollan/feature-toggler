@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TogglerAdmin.Api", "Toggler
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TogglerAdmin.Data.MongoDb", "TogglerAdmin.Data.MongoDb\TogglerAdmin.Data.MongoDb.csproj", "{829A5B8D-67F3-40C2-A70E-7C1FF3279C11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TogglerAdmin.Abstractions", "TogglerAdmin.Abstractions\TogglerAdmin.Abstractions.csproj", "{7603D744-D00F-4ED0-959B-50F2B0CA79B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TogglerAdmin.Abstractions", "TogglerAdmin.Abstractions\TogglerAdmin.Abstractions.csproj", "{7603D744-D00F-4ED0-959B-50F2B0CA79B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TogglerAdmin.Domain", "ToggleAdmin.Domain\TogglerAdmin.Domain.csproj", "{DA543795-9B05-4709-B113-2EC640E3C006}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TogglerAdmin.Domain", "ToggleAdmin.Domain\TogglerAdmin.Domain.csproj", "{DA543795-9B05-4709-B113-2EC640E3C006}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TogglerAdmin.Integration.Tests", "TogglerAdmin.Integration.Tests\TogglerAdmin.Integration.Tests.csproj", "{687F2CAA-3520-4033-8DC3-9D382FE18D13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DA543795-9B05-4709-B113-2EC640E3C006}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA543795-9B05-4709-B113-2EC640E3C006}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA543795-9B05-4709-B113-2EC640E3C006}.Release|Any CPU.Build.0 = Release|Any CPU
+		{687F2CAA-3520-4033-8DC3-9D382FE18D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{687F2CAA-3520-4033-8DC3-9D382FE18D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{687F2CAA-3520-4033-8DC3-9D382FE18D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{687F2CAA-3520-4033-8DC3-9D382FE18D13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
