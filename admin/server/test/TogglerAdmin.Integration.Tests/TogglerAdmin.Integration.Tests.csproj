@@ -18,9 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ToggleAdmin.Domain\TogglerAdmin.Domain.csproj" />
-    <ProjectReference Include="..\TogglerAdmin.Abstractions\TogglerAdmin.Abstractions.csproj" />
-    <ProjectReference Include="..\TogglerAdminApi\TogglerAdmin.Api.csproj" />
+    <ProjectReference Include="..\..\src\ToggleAdmin.Domain\TogglerAdmin.Domain.csproj" />
+    <ProjectReference Include="..\..\src\TogglerAdmin.Abstractions\TogglerAdmin.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\TogglerAdminApi\TogglerAdmin.Api.csproj" />
   </ItemGroup>
 
 </Project>
