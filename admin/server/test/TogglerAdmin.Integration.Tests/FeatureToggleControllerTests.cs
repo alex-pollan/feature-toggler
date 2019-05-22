@@ -29,8 +29,8 @@ namespace TogglerAdmin.Integration.Tests
             Assert.Equal("application/json; charset=utf-8",
                 response.Content.Headers.ContentType.ToString());
 
-            //var stringResponse = await response.Content.ReadAsStringAsync();
-            //var models = JsonConvert.DeserializeObject<IEnumerable<FeatureToggleViewModel>>(stringResponse);
+            var stringResponse = await response.Content.ReadAsStringAsync();
+            var models = JsonConvert.DeserializeObject<IEnumerable<FeatureToggleViewModel>>(stringResponse);
 
         }
     }

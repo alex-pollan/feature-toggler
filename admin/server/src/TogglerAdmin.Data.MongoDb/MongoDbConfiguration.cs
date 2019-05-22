@@ -1,14 +1,8 @@
-﻿namespace TogglerAdmin.Data.MongoDb
+namespace TogglerAdmin.Data.MongoDb
 {
     public class MongoDbConfiguration
     {
-        public MongoDbConfiguration(string connectionString, string databaseName)
-        {
-            ConnectionString = connectionString;
-            DatabaseName = databaseName;
-        }
-
-        public string ConnectionString { get; }
-        public string DatabaseName { get; internal set; }
+        public string ConnectionString { get; set; }
+        public string DatabaseName { get; set; }
     }
 }

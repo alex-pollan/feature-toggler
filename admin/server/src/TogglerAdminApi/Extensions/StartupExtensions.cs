@@ -1,20 +1,20 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using TogglerAdmin.Domain;
 using TogglerAdmin.Abstractions.Data;
 using TogglerAdmin.Abstractions.Domain;
 using TogglerAdmin.Data.MongoDb;
 using TogglerAdmin.Abstractions;
+using Microsoft.Extensions.Configuration;
 
 namespace TogglerAdmin.Api.Extensions
 {
     public static class StartupExtensions
     {
-        public static IServiceCollection AddFeatureTogglesAdminSupport(this IServiceCollection services)
+        public static IServiceCollection AddFeatureTogglesAdminSupport(this IServiceCollection services,
+            IConfiguration configuration)
         {
-            //TODO: configuration
-            var mongoDbConfiguration = new MongoDbConfiguration(
-                "mongodb://localhost:27017",
-                "featuretoggles");
+            var mongoDbConfiguration = new MongoDbConfiguration();
+            configuration.GetSection("MongoDb").Bind(mongoDbConfiguration);            
             services.AddSingleton(mongoDbConfiguration);
             services.AddScoped<IFeatureToggleRepository, MongoDbFeatureToggleRepository>();
             services.AddScoped<IFeatureToggleService, FeatureToggleService>();
