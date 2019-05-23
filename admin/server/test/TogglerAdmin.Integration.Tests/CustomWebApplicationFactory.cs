@@ -25,16 +25,6 @@ namespace TogglerAdmin.Integration.Tests
             builder.ConfigureServices(services =>
             {
                 var sp = services.BuildServiceProvider();
-
-                //TODO: seed at test level for better control
-                var mongoDbConfiguration = new MongoDbConfiguration();
-                sp.GetRequiredService<IConfiguration>().GetSection("MongoDb").Bind(mongoDbConfiguration);
-
-                var seed = new MongoDbDataSeed(mongoDbConfiguration.ConnectionString, "integration_tests");
-
-                seed.Cleanup();
-
-                seed.Seed();
             });
         }
     }

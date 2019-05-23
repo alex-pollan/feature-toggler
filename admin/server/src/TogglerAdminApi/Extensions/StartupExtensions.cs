@@ -13,6 +13,8 @@ namespace TogglerAdmin.Api.Extensions
         public static IServiceCollection AddFeatureTogglesAdminSupport(this IServiceCollection services,
             IConfiguration configuration)
         {
+            //TODO: configuration from env variables?
+            //  to control it from integration tests
             var mongoDbConfiguration = new MongoDbConfiguration();
             configuration.GetSection("MongoDb").Bind(mongoDbConfiguration);            
             services.AddSingleton(mongoDbConfiguration);

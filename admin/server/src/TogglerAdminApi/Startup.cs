@@ -24,7 +24,7 @@ namespace TogglerAdmin.Api
                 options.AddPolicy("all",
                 builder =>
                 {
-                    //TODO: origins in configuration?
+                    //TODO: origins in configuration
                     builder.WithOrigins("https://localhost:4200")
                         .AllowAnyHeader()
                         .AllowAnyMethod();

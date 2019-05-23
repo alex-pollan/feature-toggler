@@ -1,0 +1,6 @@
+<RunSettings>  
+    <TestRunParameters>
+        <Parameter name="mongodb_connection_string" value="mongodb://localhost:27017" />
+        <Parameter name="mongodb_database" value="integration_tests" />
+    </TestRunParameters>
+</RunSettings>  

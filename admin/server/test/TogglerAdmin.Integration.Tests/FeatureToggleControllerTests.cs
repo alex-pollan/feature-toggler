@@ -1,32 +1,26 @@
-using Microsoft.AspNetCore.Mvc.Testing;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using NUnit.Framework;
 using TogglerAdmin.Domain.ViewModels;
-using Xunit;
 
 namespace TogglerAdmin.Integration.Tests
 {
-    public class FeatureToggleControllerTests : IClassFixture<CustomWebApplicationFactory<TogglerAdmin.Api.Startup>>
+    [TestFixture]
+    public class FeatureToggleControllerTests : BaseTest
     {
-        private readonly CustomWebApplicationFactory<TogglerAdmin.Api.Startup> _factory;
-
-        public FeatureToggleControllerTests(CustomWebApplicationFactory<TogglerAdmin.Api.Startup> factory)
-        {
-            _factory = factory;
-        }
-
-        [Fact]
-        public async void Get()
+        [Test]
+        public async Task Get()
         {
             // Arrange
-            var client = _factory.CreateClient();
 
             // Act
-            var response = await client.GetAsync("/api/featuretoggle");
+            var response = await Client.GetAsync("/api/featuretoggle");
 
             // Assert
             response.EnsureSuccessStatusCode(); // Status Code 200-299
-            Assert.Equal("application/json; charset=utf-8",
+            Assert.AreEqual("application/json; charset=utf-8",
                 response.Content.Headers.ContentType.ToString());
 
             var stringResponse = await response.Content.ReadAsStringAsync();
