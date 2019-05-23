@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TogglerAdmin.Abstractions;
@@ -44,7 +44,15 @@ namespace TogglerAdmin.Api.Controllers
                     return BadRequest();
             }
         }
-        
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            await _service.Delete(id);
+            return NoContent();
+        }
+
         [HttpGet]
         [Route("exists/{name}")]
         public async Task<ActionResult<bool>> Exists(string name)

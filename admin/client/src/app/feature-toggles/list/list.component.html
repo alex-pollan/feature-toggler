@@ -20,6 +20,7 @@
           <th>Name</th>
           <th>Description</th>
           <th>Enabled</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -32,6 +33,10 @@
               [disabled]="model.changing">
               {{model.toggle.enabled ? 'On' : 'Off'}}
             </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="deleteToggle(model)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>

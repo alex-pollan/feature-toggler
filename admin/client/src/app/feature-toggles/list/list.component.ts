@@ -29,4 +29,18 @@ export class FeatureTogglesListComponent implements OnInit {
         model.changing = false;
       });
   }
+
+  deleteToggle(model: ToggleListModel) {
+    const toggle = model.toggle;
+    model.changing = true;
+    this.featureTogglesService.delete(toggle).subscribe(_ => {
+      const index = this.toggleModels.indexOf(model);
+      if (index >= 0) {
+        this.toggleModels.splice(index, 1);
+      }
+    }, err => {
+      // TODO: handle errors
+      model.changing = false;
+    });
+  }
 }

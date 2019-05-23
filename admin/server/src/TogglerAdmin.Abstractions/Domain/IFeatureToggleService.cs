@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TogglerAdmin.Abstractions.Domain.ViewModels;
 
@@ -11,5 +11,6 @@ namespace TogglerAdmin.Abstractions.Domain
         Task<IFeatureToggleViewModel> Create(IFeatureToggleViewModel viewModel, IAppOperationContext context);
         Task Update(IFeatureToggleViewModel viewModel, IAppOperationContext context);
         Task Enable(string id, bool enable);
+        Task Delete(string id);
     }
 }

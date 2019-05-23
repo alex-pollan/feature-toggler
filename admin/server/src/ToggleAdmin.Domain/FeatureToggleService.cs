@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using TogglerAdmin.Domain.ViewModels;
 using TogglerAdmin.Abstractions;
@@ -33,6 +33,11 @@ namespace TogglerAdmin.Domain
             var savedModel = await _repository.Create(model);
 
             return new FeatureToggleViewModel(savedModel);
+        }
+
+        public async Task Delete(string id)
+        {
+            await _repository.Remove(id);
         }
 
         public async Task Enable(string id, bool enable)

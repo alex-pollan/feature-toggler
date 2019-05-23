@@ -10,6 +10,8 @@ const httpOptions = {
   })
 };
 
+const apiUrl = 'https://localhost:44314/api/featuretoggle';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,11 +19,11 @@ export class FeatureTogglesService {
   constructor(private httpClient: HttpClient) { }
 
   getAll(): Observable<any> {
-    return this.httpClient.get<any>('https://localhost:44314/api/featuretoggle');
+    return this.httpClient.get<any>(apiUrl);
   }
 
   create(toggle: Toggle) {
-    return this.httpClient.post<Toggle>('https://localhost:44314/api/featuretoggle', toggle, httpOptions)
+    return this.httpClient.post<Toggle>(apiUrl, toggle, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -34,12 +36,12 @@ export class FeatureTogglesService {
       propertyValue: enable
     };
 
-    return this.httpClient.patch('https://localhost:44314/api/featuretoggle', patchRequest, httpOptions);
+    return this.httpClient.patch(apiUrl, patchRequest, httpOptions);
   }
 
   isDuplicated(value: any): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this.httpClient.get<any>(`https://localhost:44314/api/featuretoggle/exists/${value}`)
+      this.httpClient.get<any>(`${apiUrl}/exists/${value}`)
         .subscribe(
           d => resolve(!d.exists),
           err => {
@@ -47,6 +49,10 @@ export class FeatureTogglesService {
           }
         );
     });
+  }
+
+  delete(toggle: Toggle) {
+    return this.httpClient.delete(`${apiUrl}/${toggle.id}`, httpOptions);
   }
 
   private handleError(error: HttpErrorResponse) {
