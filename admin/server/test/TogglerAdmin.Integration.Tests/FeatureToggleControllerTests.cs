@@ -14,6 +14,7 @@ namespace TogglerAdmin.Integration.Tests
         public async Task Get()
         {
             // Arrange
+            //Seed.
 
             // Act
             var response = await Client.GetAsync("/api/featuretoggle");
