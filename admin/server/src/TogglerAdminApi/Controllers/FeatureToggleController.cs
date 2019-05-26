@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using TogglerAdmin.Abstractions;
 using TogglerAdmin.Abstractions.Domain;
+using TogglerAdmin.Abstractions.Exceptions;
 using TogglerAdmin.Api.Controllers.Models;
 using TogglerAdmin.Domain.ViewModels;
 
@@ -19,6 +20,7 @@ namespace TogglerAdmin.Api.Controllers
             _service = service;
         }
 
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<FeatureToggleViewModel>>> Get()
         {
             return Ok(await _service.Get());
@@ -27,9 +29,21 @@ namespace TogglerAdmin.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> Post(FeatureToggleViewModel model)
         {
-            var savedModel = await _service.Create(model, GetContext());
+            if (await IsValid(model))
+            {
+                try
+                {
+                    var savedModel = await _service.Create(model, GetContext());
 
-            return Ok(new { Id = savedModel.Id.ToString() });
+                    return Ok(new { Id = savedModel.Id.ToString() });
+                }
+                catch (DuplicateFeatureToggleNameException)
+                {
+                    return Conflict("duplicate toggle name");
+                }
+            }
+
+            return BadRequest();
         }
 
         [HttpPatch]
@@ -57,12 +71,22 @@ namespace TogglerAdmin.Api.Controllers
         [Route("exists/{name}")]
         public async Task<ActionResult<bool>> Exists(string name)
         {
-            return Ok(new { Exists = !(await _service.GetByName(name)).IsEmpty });
+            return base.Ok(new { Exists = !await ExistsName(name) });
+        }
+
+        private async Task<bool> ExistsName(string name)
+        {
+            return (await _service.GetByName(name)).IsEmpty;
         }
 
         private IAppOperationContext GetContext()
         {
             return new AppOperationContext(HttpContext.User.Identity.Name);
+        }
+
+        private async Task<bool> IsValid(FeatureToggleViewModel model)
+        {
+            return !string.IsNullOrWhiteSpace(model.Name);
         }
 
         private async Task<ActionResult> Enable(string id, string enableString)

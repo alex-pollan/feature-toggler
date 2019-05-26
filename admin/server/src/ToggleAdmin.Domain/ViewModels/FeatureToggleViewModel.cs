@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using TogglerAdmin.Abstractions.Data.Models;
 using TogglerAdmin.Abstractions.Domain.ViewModels;
 
