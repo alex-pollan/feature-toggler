@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using MongoDB.Driver;
 using TogglerAdmin.Data.MongoDb;
+using TogglerAdmin.Domain.ViewModels;
 
 namespace TogglerAdmin.Integration.Tests.Utils
 {
@@ -13,6 +15,14 @@ namespace TogglerAdmin.Integration.Tests.Utils
             var client = new MongoClient(connectionString);
             var database = client.GetDatabase(databaseName);
             _featureToggles = database.GetCollection<MongoDbFeatureToggleModel>("FeatureToggles");
+        }
+
+        internal void SeedFeatureToggles(IEnumerable<MongoDbFeatureToggleModel> toggles)
+        {
+            foreach (var toggle in toggles)
+            {
+                _featureToggles.InsertOne(toggle);
+            }
         }
 
         public void Seed()

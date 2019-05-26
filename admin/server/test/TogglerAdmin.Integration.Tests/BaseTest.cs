@@ -7,7 +7,7 @@ namespace TogglerAdmin.Integration.Tests
     public class BaseTest
     {
         protected HttpClient Client;
-        protected MongoDbDataSeed Seed;
+        protected MongoDbDataSeed DataSeed;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -15,13 +15,17 @@ namespace TogglerAdmin.Integration.Tests
             var factory = new CustomWebApplicationFactory<Api.Startup>();
             Client = factory.CreateClient();
 
-            Seed = new MongoDbDataSeed(
+            DataSeed = new MongoDbDataSeed(
                 GetParameter("mongodb_connection_string"),
                 GetParameter("mongodb_database"));
 
-            Seed.Cleanup();
+            DataSeed.Cleanup();
+        }
 
-            //seed.Seed();
+        [TearDown]
+        public void TearDown()
+        {
+            DataSeed.Cleanup();
         }
 
         protected string GetParameter(string name, string defaultValue = null)
