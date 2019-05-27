@@ -29,7 +29,7 @@ namespace TogglerAdmin.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> Post(FeatureToggleViewModel model)
         {
-            if (await IsValid(model))
+            if (IsValid(model))
             {
                 try
                 {
@@ -84,7 +84,7 @@ namespace TogglerAdmin.Api.Controllers
             return new AppOperationContext(HttpContext.User.Identity.Name);
         }
 
-        private async Task<bool> IsValid(FeatureToggleViewModel model)
+        private bool IsValid(FeatureToggleViewModel model)
         {
             return !string.IsNullOrWhiteSpace(model.Name);
         }
@@ -98,7 +98,7 @@ namespace TogglerAdmin.Api.Controllers
 
             await _service.Enable(id, enable);
 
-            return Ok();
+            return NoContent();
         }
     }
 }
