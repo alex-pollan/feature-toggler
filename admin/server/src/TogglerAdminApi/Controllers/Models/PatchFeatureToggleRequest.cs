@@ -1,11 +1,12 @@
-﻿namespace TogglerAdmin.Api.Controllers.Models
+namespace TogglerAdmin.Api.Controllers.Models
 {
     public class PatchFeatureToggleRequest
     {
-        public const string PropertyEnable = "enable";
+        public const string OperationEnable = "enable";
+        public const string OperationSetDescription = "setdescription";
+        public static readonly string[] Operations = new[] { OperationEnable, OperationSetDescription };
 
-        public string Id { get; set; }
-        public string PropertyName { get; set; }
-        public string PropertyValue { get; set; }
+        public string Operation { get; set; }
+        public string Value { get; set; }
     }
 }

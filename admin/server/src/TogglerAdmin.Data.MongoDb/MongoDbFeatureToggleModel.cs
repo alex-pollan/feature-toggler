@@ -1,4 +1,4 @@
-﻿using MongoDB.Bson;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using TogglerAdmin.Abstractions.Data.Models;
@@ -11,6 +11,7 @@ namespace TogglerAdmin.Data.MongoDb
 
         public MongoDbFeatureToggleModel(IFeatureToggleModel model)
         {
+            Id = model.Id;
             Name = model.Name.ToLowerInvariant();
             Description = model.Description;
             Enabled = model.Enabled;

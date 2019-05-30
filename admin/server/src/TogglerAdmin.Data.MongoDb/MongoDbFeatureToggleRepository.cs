@@ -1,4 +1,4 @@
-﻿using MongoDB.Driver;
+using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -50,6 +50,8 @@ namespace TogglerAdmin.Data.MongoDb
 
         public async Task Update(string id, IFeatureToggleModel model)
         {
+            model.Id = id;
+
             var concreteModel = new MongoDbFeatureToggleModel(model);
 
             await _featureToggles.ReplaceOneAsync(ft => ft.Id == id, concreteModel);

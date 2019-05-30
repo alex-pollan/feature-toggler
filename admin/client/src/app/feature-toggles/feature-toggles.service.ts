@@ -30,13 +30,12 @@ export class FeatureTogglesService {
   }
 
   enable(toggle: Toggle, enable: boolean) {
-    const patchRequest = {
-      id: toggle.id,
-      propertyName: 'enable',
-      propertyValue: enable
-    };
+    const patchRequest = [{
+      operation: 'enable',
+      value: enable
+    }];
 
-    return this.httpClient.patch(apiUrl, patchRequest, httpOptions);
+    return this.httpClient.patch(`${apiUrl}/${toggle.id}`, patchRequest, httpOptions);
   }
 
   isDuplicated(value: any): Promise<boolean> {

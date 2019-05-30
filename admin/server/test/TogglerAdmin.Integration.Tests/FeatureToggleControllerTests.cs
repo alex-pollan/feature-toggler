@@ -107,9 +107,9 @@ namespace TogglerAdmin.Integration.Tests
         }
 
         [Test]
-        [TestCase(false, PatchFeatureToggleRequest.PropertyEnable, "true", HttpStatusCode.NoContent, "Enable value must change")]
+        [TestCase(false, PatchFeatureToggleRequest.OperationEnable, "true", HttpStatusCode.NoContent, "Enable value must change")]
         [TestCase(false, "unknown", "true", HttpStatusCode.BadRequest, "Enable value must not change if invalid patch property name")]
-        [TestCase(false, PatchFeatureToggleRequest.PropertyEnable, "wrong_bool_value", HttpStatusCode.BadRequest, "Enable value must not change if invalid patch property value")]
+        [TestCase(false, PatchFeatureToggleRequest.OperationEnable, "wrong_bool_value", HttpStatusCode.BadRequest, "Enable value must not change if invalid patch property value")]
         public async Task Patch_Enable(bool enabled, string patchPropertyName, string patchPropertyValue, HttpStatusCode expectedStatusCode, string assertMessage)
         {
             //Arrange
@@ -117,13 +117,12 @@ namespace TogglerAdmin.Integration.Tests
             DataSeed.SeedFeatureToggles(new[] { toggle });
             var patchRequest = new PatchFeatureToggleRequest
             {
-                Id = toggle.Id,
-                PropertyName = patchPropertyName,
-                PropertyValue = patchPropertyValue
+                Operation = patchPropertyName,
+                Value = patchPropertyValue
             };
 
             //Act
-            var response = await Client.PatchAsync(ApiUrl, CreateHttpContent(patchRequest));
+            var response = await Client.PatchAsync($"{ApiUrl}/{toggle.Id}", CreateHttpContent(new[] { patchRequest }));
 
             //Assert
             AssertResponse(response, expectedStatusCode);

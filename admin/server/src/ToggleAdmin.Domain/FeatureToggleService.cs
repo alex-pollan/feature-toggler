@@ -57,10 +57,17 @@ namespace TogglerAdmin.Domain
             return model != null ? new FeatureToggleViewModel(model) : FeatureToggleViewModel.Empty();
         }
 
+        public async Task<IFeatureToggleViewModel> GetById(string id)
+        {
+            var model = await _repository.Get(id);
+            return model != null ? new FeatureToggleViewModel(model) : FeatureToggleViewModel.Empty();
+        }
+
         public async Task Update(IFeatureToggleViewModel viewModel, IAppOperationContext context)
         {
             var model = _repository.CreateModel();
 
+            model.Id = viewModel.Id;
             model.Name = viewModel.Name;
             model.Description = viewModel.Description;
             model.Enabled = viewModel.Enabled;

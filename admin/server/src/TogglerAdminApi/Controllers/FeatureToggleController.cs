@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TogglerAdmin.Abstractions;
@@ -47,16 +49,49 @@ namespace TogglerAdmin.Api.Controllers
         }
 
         [HttpPatch]
-        public async Task<ActionResult> Patch(PatchFeatureToggleRequest request)
+        [Route("{id}")]
+        public async Task<ActionResult> Patch(string id, [FromBody] IEnumerable<PatchFeatureToggleRequest> patches)
         {
-            switch (request.PropertyName)
+            if (patches == null || !patches.Any()
+                || !patches.All(patch => PatchFeatureToggleRequest.Operations.Contains(patch.Operation.ToLowerInvariant())))
             {
-                case PatchFeatureToggleRequest.PropertyEnable:
-                    return await Enable(request.Id, request.PropertyValue);
-
-                default:
-                    return BadRequest();
+                return BadRequest();
             }
+
+            var toggle = await _service.GetById(id);
+
+            if (toggle.IsEmpty)
+            {
+                return NotFound();
+            }
+
+            foreach (var patch in patches)
+            {
+                switch (patch.Operation)
+                {
+                    case PatchFeatureToggleRequest.OperationEnable:
+                        if (!bool.TryParse(patch.Value, out var enable))
+                        {
+                            return BadRequest();
+                        }
+
+                        toggle.Enabled = enable;
+
+                        break;
+
+                    case PatchFeatureToggleRequest.OperationSetDescription:
+                        toggle.Description = patch.Value;
+
+                        break;
+                    default:
+
+                        return BadRequest();
+                }
+            }
+
+            await _service.Update(toggle, GetContext());
+
+            return NoContent();
         }
 
         [HttpDelete]
@@ -87,18 +122,6 @@ namespace TogglerAdmin.Api.Controllers
         private bool IsValid(FeatureToggleViewModel model)
         {
             return !string.IsNullOrWhiteSpace(model.Name);
-        }
-
-        private async Task<ActionResult> Enable(string id, string enableString)
-        {
-            if (!bool.TryParse(enableString, out var enable))
-            {
-                return BadRequest();
-            }
-
-            await _service.Enable(id, enable);
-
-            return NoContent();
         }
     }
 }
